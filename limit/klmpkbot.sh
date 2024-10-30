@@ -12,13 +12,13 @@ rm -rf regis
 apt update && apt upgrade
 apt install python3 python3-pip git
 cd /usr/bin
-wget https://raw.githubusercontent.com/abgtunell/v5/main/limit/bot.zip
+wget https://raw.githubusercontent.com/abgcell/sc/main/limit/bot.zip
 unzip bot.zip
 mv bot/* /usr/bin
 chmod +x /usr/bin/*
 rm -rf bot.zip
 cd /root
-wget https://raw.githubusercontent.com/abgtunell/v5/main/limit/regis.zip
+wget https://raw.githubusercontent.com/abgcell/sc/main/limit/regis.zip
 unzip regis.zip
 rm -rf regis.zip
 pip3 install -r regis/requirements.txt

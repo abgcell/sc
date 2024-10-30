@@ -40,7 +40,7 @@ clear
 # Getting
 ipsaya=$(wget -qO- ipinfo.io/ip)
 data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
-data_ip="https://raw.githubusercontent.com/abgtunell/v5/main/izin"
+data_ip="https://raw.githubusercontent.com/abgcell/sc/main/izin"
 use=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $2}')
 checking_sc() {
   useexp=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $3}')
