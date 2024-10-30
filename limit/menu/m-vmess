@@ -1,0 +1,164 @@
+#!/bin/bash
+
+Green="\e[92;1m"
+RED="\033[31m"
+YELLOW="\033[33m"
+BLUE="\033[36m"
+FONT="\033[0m"
+GREENBG="\033[42;37m"
+REDBG="\033[41;37m"
+OK="${Green}--->${FONT}"
+ERROR="${RED}[ERROR]${FONT}"
+GRAY="\e[1;30m"
+NC='\e[0m'
+red='\e[1;31m'
+green='\e[0;32m'
+DF='\e[39m'
+Bold='\e[1m'
+Blink='\e[5m'
+yell='\e[33m'
+red='\e[31m'
+green='\e[32m'
+blue='\e[34m'
+PURPLE='\e[35m'
+cyan='\e[36m'
+Lred='\e[91m'
+Lgreen='\e[92m'
+Lyellow='\e[93m'
+NC='\e[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+LIGHT='\033[0;37m'
+grenbo="\e[92;1m"
+red() { echo -e "\\033[32;1m${*}\\033[0m"; }
+# Getting
+export CHATID="1210833546"
+export KEY="6006599143:AAEgstCAioq35JgX97HaW_G3TAkLKzLZS_w"
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+clear
+# Getting
+ipsaya=$(wget -qO- ipinfo.io/ip)
+data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+data_ip="https://raw.githubusercontent.com/abgtunell/v5/main/izin"
+use=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $2}')
+checking_sc() {
+  useexp=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $3}')
+  if [[ $(date -d "$date_list" +%s) -lt $(date -d "$useexp" +%s) ]]; then
+    echo -ne
+  else
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e "\033[42m          TEKIRO AUTOSCRIPT PREMIUM          \033[0m"
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e ""
+    echo -e "            ${RED}PERMISSION DENIED !${NC}"
+    echo -e "   \033[0;33mYour VPS${NC} $ipsaya \033[0;33mHas been Banned${NC}"
+    echo -e "     \033[0;33mBuy access permissions for scripts${NC}"
+    echo -e "             \033[0;33mContact Admin :${NC}"
+    echo -e "      \033[0;36mTelegram${NC} t.me/"
+    echo -e "      ${GREEN}WhatsApp${NC} wa.me/6287705663667"
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    exit
+  fi
+}
+checking_sc
+clear
+echo -e "\e[0m————————————————————————————————————————\e[0m"
+echo -e "   $PURPLE       MENU VMESS & VLESS             $NC"
+echo -e "\e[0m————————————————————————————————————————\e[0m"
+echo -e ""
+echo -e "\e[0m—————————————————————\e[0m"
+echo -e "  $PURPLE   XRAY VMESS     $NC"
+echo -e "\e[0m—————————————————————\e[0m"
+echo -e ""
+echo -e "  ${NC} 1.) Create Accounts  $NC"
+echo -e "  ${NC} 2.) Trial Accounts  $NC"
+echo -e "  ${NC} 3.) Delete Accounts  $NC"
+echo -e "  ${NC} 4.) Renew Accounts  $NC"
+echo -e "  ${NC} 5.) Check User Login $NC"
+echo -e "  ${NC} 6.) Detail Accounts  $NC"
+echo -e "  ${NC} 7.) Edit User Limit Quota Vmess$NC"
+echo -e "  ${NC} 8.) Edit User Limit Ip Vmess$NC"
+echo -e ""
+echo -e "\e[0m—————————————————————\e[0m"
+echo -e "  $PURPLE   XRAY VLESS     $NC"
+echo -e "\e[0m—————————————————————\e[0m"
+echo -e ""
+echo -e "  ${NC} 9.) Create Accounts  $NC"
+echo -e "  ${NC} 10.) Trial Accounts  $NC"
+echo -e "  ${NC} 11.) Delete Accounts  $NC"
+echo -e "  ${NC} 12.) Renew Accounts  $NC"
+echo -e "  ${NC} 13.) Check User Login $NC"
+echo -e "  ${NC} 14.) Detail Accounts  $NC"
+echo -e "  ${NC} 15.) Edit User Limit Quota Vless $NC"
+echo -e "  ${NC} 16.) Edit User Limit Ip Vless $NC"
+echo -e "  ${NC} 17.) On Off All Limip Xray $NC"
+echo -e ""
+echo -e "\e[0m—————————————————————\e[0m"
+echo -e "  $PURPLE   UNLOCK && LOCK     $NC"
+echo -e "\e[0m—————————————————————\e[0m"
+echo -e ""
+echo -e "  ${NC} 18.) Menu Unlock All Xray  $NC"
+echo -e "\e[0m————————————————————————————————————————\e[0m"
+echo -e "\e[0m————————————————————————————————————————\e[0m"
+echo -e ""
+read -p "Select From Options [ 1 - 12 ] : " menu
+case $menu in
+1)   clear ;
+    addws
+    ;;
+2) clear ;
+    trialws
+    ;;
+3) clear ;
+    delws
+    ;;
+4) clear ;
+    renewws
+    ;;
+5) clear ;
+    cekws
+    ;;
+6) clear ;
+    user-ws
+    ;;
+7) clear ;
+    editqvm
+    ;;
+8) clear ;
+    editvmip
+    ;;
+9)  clear ;
+    addvless
+    ;;
+10) clear ;
+    trialvless
+    ;;
+11) clear ;
+    delvless
+    ;;
+12) clear ;
+    renewvless
+    ;;
+13) clear ;
+    cekvless
+    ;;
+14) clear ;
+    user-vless
+    ;;
+15) clear ;
+    editqvless
+    ;;
+16) clear ;
+    editvlip
+    ;;
+17) clear ;
+    onoff
+    ;;    
+18) clear ;
+    xraylock
+    ;;        
+*) clear ;
+    menu
+    ;;
+esac

@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Fungsi untuk membuka kunci akses pengguna XRAY
+function unlock(){
+    sed -i 's/ UNLOCKED//g' /etc/trojan/.trojan.db
+    clear
+    echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+    echo -e "$COLOR1│${NC} ${COLBG1}             • UNLOCK XRAY USER •              ${NC} $COLOR1│$NC"
+    echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+    read -rp "   Input Username for unlock: " user
+    if [ -z $user ]; then
+        menu-trojan
+    else
+        uuid=$(cat /etc/trojan/.trojan.db | grep $user | awk '{print $4}')
+        exp=$(cat /etc/trojan/.trojan.db | grep $user | awk '{print $3}')
+        if [ -z "$uuid" ]; then
+            echo "Oh tidak, UUID-mu terhapus."
+            echo "Membuat UUID baru..."
+            uuid=$(cat /proc/sys/kernel/random/uuid)
+        else
+            echo "UUID tersedia: $uuid"
+        fi
+        sed -i '/#trojan$/a\### '"$user $exp"'\
+    },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
+        sed -i '/#trojangrpc$/a\### '"$user $exp"'\
+    },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
+        systemctl restart xray > /dev/null 2>&1
+        clear
+        echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+        echo -e "$COLOR1│${NC} ${COLBG1}             • UNLOCKED XRAY USER •          ${NC} $COLOR1│$NC"
+        echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+        echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+        echo -e "$COLOR1│${NC}   • Account unlocked Successfully"
+        echo -e "$COLOR1│${NC}"
+        echo -e "$COLOR1│${NC}   • Client Name : $user"
+        echo -e "$COLOR1│${NC}   • Expired On  : $exp"
+        echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+        echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+        echo -e "$COLOR1│${NC}                 • KLMPK VPN PREMIUM •                 $COLOR1│$NC"
+        echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+        echo ""
+        read -n 1 -s -r -p "   Press any key to return to the menu"
+        menu-unlock
+    fi
+}
+
+# Panggil fungsi untuk membuka kunci akses pengguna XRAY
+unlock

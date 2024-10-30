@@ -1,0 +1,38 @@
+#!/bin/bash
+
+function change_vmess_quota() {
+  read -p "Masukkan nama pengguna VLESS: " user
+  quota_file="/etc/vless/${user}"
+
+  # Validasi apakah file kuota sudah ada
+  if [ -e "$quota_file" ]; then
+    current_quota=$(cat "$quota_file")
+    echo "Kuota saat ini untuk pengguna $user: $((current_quota / 1024 / 1024 / 1024)) GB"
+
+    read -p "Masukkan kuota baru (GB): " new_quota
+
+    # Validasi jika masukan kosong atau tidak valid
+    if [[ -z "$new_quota" || ! "$new_quota" =~ ^[0-9]+$ ]]; then
+      echo "Masukan tidak valid. Kuota tidak berubah."
+    else
+      # Konversi kuota ke byte
+      new_quota_bytes=$((new_quota * 1024 * 1024 * 1024))
+      echo "${new_quota_bytes}" > "${quota_file}"
+      echo "Kuota berhasil diubah menjadi $new_quota GB untuk pengguna $user."
+
+      # Hapus entri lama dan tambahkan yang baru ke dalam database
+      DATADB=$(cat /etc/vless/.vless.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
+      if [[ "${DATADB}" != '' ]]; then
+        sed -i "/\b${user}\b/d" /etc/vless/.vless.db
+      fi
+      echo "### ${user} ${exp} ${uuid} ${new_quota_bytes} ${iplimit}" >>/etc/vless/.vless.db
+
+      echo "Database berhasil diperbarui."
+    fi
+  else
+    echo "File kuota tidak ditemukan untuk pengguna $user."
+  fi
+}
+
+# Panggil fungsi untuk mengganti kuota VMess
+change_vmess_quota

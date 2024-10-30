@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Fungsi untuk mencetak teks dalam kotak garis
+print_separator() {
+    local separator=""
+    local width=50
+
+    for (( i=0; i<width; i++ )); do
+        separator="${separator}-"
+    done
+
+    echo "$separator"
+}
+
+# Menambahkan judul SSH OVPN Account pada setiap baris
+echo -e "\033[1;93m--------------------------------------------------\033[0m"
+echo -e "\033[1;93m SSH OVPN Account\033[0m"
+echo -e "\033[1;93m--------------------------------------------------\033[0m"
+
+# Counter untuk nomor per akun
+count=1
+
+# Memeriksa detail akun SSH menggunakan grep
+grep "#ssh#" /etc/ssh/.ssh.db | while read -r line; do
+    # Memisahkan informasi menggunakan spasi sebagai delimiter
+    IFS='#' read -r _ username_info <<< "$line"
+    IFS=' ' read -r _ username password quota limit_ip expired_date <<< "$username_info"
+    
+    # Mencetak pemisah akun dengan judul
+    echo -e "\033[1;93m--------------------------------------------------\033[0m"
+    echo -e "\033[1;93m Account $count\033[0m"
+    echo -e "\033[1;93m--------------------------------------------------\033[0m"
+
+    # Mencetak informasi akun SSH dalam format yang diminta dengan warna
+    echo "$(tput setaf 3)Username: $(tput sgr0)$username"
+    echo "$(tput setaf 4)Password: $(tput sgr0)$password"
+    echo "$(tput setaf 2)Limit IP: $(tput sgr0)$limit_ip User"
+    echo "$(tput setaf 5)Expired: $(tput sgr0)$expired_date"
+    
+    # Menambahkan 1 ke counter
+    ((count++))
+done
