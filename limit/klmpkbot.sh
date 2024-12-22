@@ -25,6 +25,8 @@ pip3 install -r regis/requirements.txt
 pip3 install pillow
 
 #isi data
+clear
+figlet 'Bayar utang'
 echo ""
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e " \e[1;97;101m          ADD BOT PANEL          \e[0m"
